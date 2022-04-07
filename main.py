@@ -18,39 +18,67 @@
 #- imprimeFinalPlaca() - Retorna o algarismo final da placa deste veículo.
 
 class CarrosCadastro():
-    def __init__(self, placa, marca, modelo, ano, cpf):
-        self.placa = placa
-        self.marca = marca
-        self.modelo = modelo
-        self.ano = ano
-        self.cpf = cpf
+    def __init__(self):
+        self.placa = ""
+        self.marca = ""
+        self.modelo = ""
+        self.ano = 0
+        self.codigo = 0
 
     #def __init__(self, cadastrar, remover, consultar):
         #self.cadastrar = cadastrar
         #self.remover = remover
         #self.consultar = consultar
 
+class ListaCarro():
+    def __init__(self):
+        self.lista = []
 
-print('Bem-vindo ao nosso cadastramento de veículos!')
-print(''' MENU:
+    def CadastroCarros(self):
+        carro = CarrosCadastro()
+        carro.placa = input("Digite a placa: ")
+        carro.marca = input("Digite a marca: ")
+        carro.modelo = input("Digite o modelo: ")
+        carro.ano = int(input("Digite o ano: "))
+        carro.codigo = int(input("Digite o código: "))
+        self.lista.append(carro)
 
-        [1] - Cadastrar novo veículo
-        [2] - Remover um veículo
-        [3] - Consultar cadastro
-        [4] - sair
-    ''')
+    def lista_vazia(self):
+        return len(self.lista) == 0
 
-x = int(input('Escolha uma opção: \n'))
-if x == 1:
-        placa = int(input('Qual a placa do veículo'))
-        marca = str(input('Qual a marca do veículo'))
-        modelo = str(input('Qual o modelo do veículo'))
-        ano = int(input('Qual o ano do veículo'))
-        cpf = int(input('Qual o CPF do dono'))
+    def remove_carro(self):
+        if self.lista_vazia():
+            print("A lista está vazia!")
+        else:
+            placa = input("Digite a placa do carro que será removida: ")
+            for carro in self.lista:
+                if carro.placa == placa:
+                    self.lista.remove(carro)
 
-carroscadastro = CarrosCadastro(placa,marca,modelo,ano,cpf)
-print('Placa:', carroscadastro.placa)
-print('Marca:', carroscadastro.marca)
-print('Modelo:',carroscadastro.modelo)
-print('Ano:',carroscadastro.ano)
-print('CPF:',carroscadastro.cpf)
+    def imprime_carro(self):
+        for carro in self.lista:
+            print("PLaca... " , carro.placa)
+            print("Modelo... ", carro.modelo)
+            print("Ano... ", carro.ano)
+            print("Código... ",carro.codigo)
+            print("Marca... ",carro.marca)
+
+carros = ListaCarro()
+x = -1
+while x != 4:
+    print('Bem-vindo ao nosso cadastramento de veículos!')
+    print(''' MENU:
+            [1] - Cadastrar novo veículo
+            [2] - Remover um veículo
+            [3] - Consultar cadastro
+            [4] - sair
+        ''')
+
+    x = int(input('Escolha uma opção: \n'))
+    if x == 1:
+        carros.CadastroCarros()
+    elif x == 2:
+        carros.remove_carro()
+
+    elif x == 3:
+        carros.imprime_carro()
