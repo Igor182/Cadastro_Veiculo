@@ -5,22 +5,19 @@ class Locadora():
 
     def CadastroCarros(self):
         carro = Carro()
-        verificacao = 0
-        while verificacao != 5:
-            placa = input("Digite a placa do carro que será cadastrada: ")
-            if len(placa) > 6:
-                verificacao +=1
-                carro.placa = placa
-            else:
-                print("Formato de placa inválida!")
-                break
+
+        placa = input("Digite a placa do carro que será cadastrada: ")
+
+        if len(placa) == 7 and placa[:3].isalpha() and placa[3:7].isnumeric():
+            carro.placa = placa
             carro.marca = input("Digite a marca: ")
             carro.modelo = input("Digite o modelo: ")
-            carro.ano = int(input("Digite o ano: "))
+            carro.ano = input("Digite o ano: ")
             carro.codigo = int(input("Digite o código: "))
             print("Carro cadastrado!")
-            break
-        self.lista.append(carro)
+            self.lista.append(carro)
+        else:
+            print("Formato de placa inválida!")
 
 
     def lista_vazia(self):
@@ -43,8 +40,9 @@ class Locadora():
             placa = input("Digite a placa do carro que será consultado: ")
             for carro in self.lista:
                 if carro.placa == placa:
-                    print("Placa: ", carro.placa)
-                    print("Modelo: ", carro.modelo)
-                    print("Ano: ", carro.ano)
-                    print("Código: ", carro.codigo)
-                    print("Marca: ", carro.marca)
+                    print("Placa do veículo: ", carro.placa)
+                    print("Modelo do veículo: ", carro.modelo)
+                    print("Ano de fabricação: ", carro.ano)
+                    print("Código do veículo: ", carro.codigo)
+                    print("Marca do veículo: ", carro.marca)
+                    print("último algarismo da placa: ", carro.placa[-1])
